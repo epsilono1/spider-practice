@@ -106,13 +106,13 @@ def save(job_list,page):
         
     
 def main():
-    
-    next = BASE_URL.format(str(1),str(1))
+    page = 1
+    next = BASE_URL.format(str(page),str(page))
     while next:
-        page = next.split('=')[-1]
         html = get_page(next, page)
         if html:
-            next,job_list = parse_page(html)
+            next, job_list = parse_page(html)
+            page = next.split('=')[-1]
             save(job_list,page)
             print(f'保存第{page}页成功！')
             continue
